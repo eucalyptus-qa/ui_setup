@@ -1,0 +1,62 @@
+IP 192.168.51.131 [Distro UBUNTU, Version PRECISE, Arch 64] will be built from BZR with Eucalyptus-UI CC00 CLC SC00 WS
+IP 192.168.51.143 [Distro UBUNTU, Version PRECISE, Arch 64] will be built from BZR with Eucalyptus-NC00
+192.168.51.131 : Running ./modify_ui_conf.pl
+
+#################### modify_ui_conf.pl ##########################
+
+#################### READ INPUT FILE ##########################
+
+IP 192.168.51.131 with UBUNTU distro was built from BZR as Eucalyptus-UI CC00 CLC SC00 WS
+IP 192.168.51.143 with UBUNTU distro was built from BZR as Eucalyptus-NC00
+
+#################### KILL RUNNING UI ##########################
+
+Display Running UI
+ps aux | grep launch.py 
+root      1290  0.0  0.0   4392   612 ?        S    16:35   0:00 sh -c ps aux | grep launch.py 
+root      1292  0.0  0.0  11676   932 ?        S    16:35   0:00 grep launch.py
+root     32311  0.1  0.1  59740 14860 ?        S    16:30   0:00 python -tt launch.py
+
+Discover and Kill Running UI
+ps aux | grep launch.py | awk '{print $2}'
+kill -9 1293
+kill -9 1296
+kill -9 32311
+
+Verify Killed UI
+ps aux | grep launch.py 
+root      1301  0.0  0.0   4392   612 ?        S    16:35   0:00 sh -c ps aux | grep launch.py 
+root      1304  0.0  0.0  11676   928 ?        S    16:35   0:00 grep launch.py
+
+
+#################### MODIFY UI CONFIG FILE ##########################
+
+=========== BEFORE MODIFICATION ==========
+
+Scan Existing UI Config File for 'clchost'
+cat /root/euca_builder/eee/eucalyptus-ui/server/eui.ini | grep clchost
+clchost: 192.168.51.131
+
+Scan Existing UI Config File for 'usemock'
+cat /root/euca_builder/eee/eucalyptus-ui/server/eui.ini | grep usemock
+usemock: False
+
+=========== AFTER MODIFICATION ==========
+
+Scan Existing UI Config File for 'clchost'
+cat /root/euca_builder/eee/eucalyptus-ui/server/eui.ini | grep clchost
+clchost: 192.168.51.131
+
+Scan Existing UI Config File for 'usemock'
+cat /root/euca_builder/eee/eucalyptus-ui/server/eui.ini | grep usemock
+usemock: False
+
+
+#################### RESTART UI ##########################
+
+Restart UI
+cd /root/euca_builder/eee/eucalyptus-ui; nohup ./launcher.sh & > /dev/null 2> /dev/null
+
+
+[TEST_REPORT]	COMPLETE MODIFY UI CONF
+

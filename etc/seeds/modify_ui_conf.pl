@@ -168,13 +168,13 @@ print "#################### KILL RUNNING UI ##########################\n";
 print "\n";
 
 print "Display Running UI\n";
-my $cmd = "ps aux | grep server\.py ";
+my $cmd = "ps aux | grep euca-console-server ";
 print "$cmd\n";
 system($cmd);
 print "\n";
 
 print "Discover and Kill Running UI\n";
-$cmd = "ps aux | grep server\.py | awk '{print \$2}'";
+$cmd = "ps aux | grep euca-console-server | awk '{print \$2}'";
 print "$cmd\n";
 
 my $tempbuf = `$cmd`;
@@ -187,7 +187,7 @@ foreach my $pid (@temparray){
 print "\n";
 
 print "Verify Killed UI\n";
-$cmd = "ps aux | grep server\.py ";
+$cmd = "ps aux | grep euca-console-server ";
 print "$cmd\n";
 system($cmd);
 print "\n";

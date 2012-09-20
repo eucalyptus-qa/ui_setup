@@ -203,9 +203,9 @@ if( $source_lst[$clc_index] eq "BZR" || $source_lst[$clc_index] eq "SRC" ){
 	$ui_conf_file = "/root/euca_builder/eee/eucalyptus-ui/server/console.ini";
 }else{
 	if( $distro_lst[$clc_index] eq "UBUNTU" ){
-		$ui_conf_file = "/root/euca_builder/eee/eucalyptus-ui/server/eui.ini";		### INCORRECT FOR NOW	090512
+		$ui_conf_file = "/etc/eucalyptus-ui/console.ini";		### INCORRECT FOR NOW 092012
 	}else{
-		$ui_conf_file = "/root/euca_builder/eee/eucalyptus-ui/server/eui.ini";		### INCORRECT FOR NOW	090512
+		$ui_conf_file = "/etc/eucalyptus-ui/console.ini";
 	};
 };
 
@@ -249,7 +249,12 @@ print "#################### RESTART UI ##########################\n";
 print "\n";
 
 print "Restart UI\n";
-$cmd = "cd /root/euca_builder/eee/eucalyptus-ui; nohup ./launcher.sh > /dev/null 2> /dev/null \&";
+if( $source_lst[$clc_index] eq "BZR" || $source_lst[$clc_index] eq "SRC" ){
+	$cmd = "cd /root/euca_builder/eee/eucalyptus-ui; nohup ./launcher.sh > /dev/null 2> /dev/null \&";
+}else{
+	$cmd = "service eucalyptus-ui restart";
+};
+
 print "$cmd\n";
 system($cmd);
 print "\n";

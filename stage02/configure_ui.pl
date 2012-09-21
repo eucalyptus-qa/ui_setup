@@ -133,7 +133,7 @@ for( my $i = 0; $i < @ip_lst; $i++ ){
 
 	if( does_It_Have($this_roll, "UI") ){
 		print "$this_ip : Running ./modify_ui_conf.pl\n"; 
-		system("ssh -o StrictHostKeyChecking=no root\@$this_ip \"cd /root/seeds; perl ./modify_ui_conf.pl\" ");
+		system("ssh -o BatchMode=yes -o ServerAliveInterval=3 -o ServerAliveCountMax=10 -o StrictHostKeyChecking=no   root\@$this_ip \"cd /root/seeds; perl ./modify_ui_conf.pl\" ");
 	};
 };
 

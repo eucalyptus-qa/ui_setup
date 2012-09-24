@@ -252,7 +252,7 @@ print "Restart UI\n";
 if( $source_lst[$clc_index] eq "BZR" || $source_lst[$clc_index] eq "SRC" ){
 	$cmd = "cd /root/euca_builder/eee/eucalyptus-ui; nohup ./launcher.sh > /dev/null 2> /dev/null \&";
 }else{
-	$cmd = "service eucalyptus-console restart";
+	$cmd = "service eucalyptus-console start";
 };
 
 print "$cmd\n";

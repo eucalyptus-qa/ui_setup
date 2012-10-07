@@ -203,9 +203,9 @@ if( $source_lst[$clc_index] eq "BZR" || $source_lst[$clc_index] eq "SRC" ){
 	$ui_conf_file = "/root/euca_builder/eee/eucalyptus-ui/server/console.ini";
 }else{
 	if( $distro_lst[$clc_index] eq "UBUNTU" ){
-		$ui_conf_file = "/etc/eucalyptus-ui/console.ini";		### INCORRECT FOR NOW 092012
+		$ui_conf_file = "/etc/eucalyptus-console/console.ini";		### INCORRECT FOR NOW 092012
 	}else{
-		$ui_conf_file = "/etc/eucalyptus-ui/console.ini";
+		$ui_conf_file = "/etc/eucalyptus-console/console.ini";
 	};
 };
 

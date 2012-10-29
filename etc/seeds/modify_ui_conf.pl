@@ -200,11 +200,10 @@ print "\n";
 my $ui_conf_file = "";
 
 if( $source_lst[$clc_index] eq "BZR" || $source_lst[$clc_index] eq "SRC" ){
-#	$ui_conf_file = "/root/euca_builder/eee/eucalyptus-ui/server/console.ini";
 	$ui_conf_file = "/root/euca_builder/eee/eucalyptus/console/server/console.ini";
 }else{
 	if( $distro_lst[$clc_index] eq "UBUNTU" ){
-		$ui_conf_file = "/etc/eucalyptus-console/console.ini";		### INCORRECT FOR NOW 092012
+		$ui_conf_file = "/etc/eucalyptus-console/console.ini";		### CANNOT VERIFY SINCE NO PACKAGES FOR UBUNTU 102912
 	}else{
 		$ui_conf_file = "/etc/eucalyptus-console/console.ini";
 	};
@@ -226,8 +225,42 @@ print "$cmd\n";
 system($cmd);
 print "\n";
 
+print "Scan Existing UI Config File for \'sslcert:\'\n";
+$cmd = "cat $ui_conf_file | grep sslcert";
+print "$cmd\n";
+system($cmd);
+print "\n";
+
+print "Scan Existing UI Config File for \'sslkey:\'\n";
+$cmd = "cat $ui_conf_file | grep sslkey";
+print "$cmd\n";
+system($cmd);
+print "\n";
+
+### ADJUST console.ini
 my_sed("clchost: .*", "clchost: $clc_ip", $ui_conf_file);
 my_sed("usemock: .*", "usemock: False", $ui_conf_file);
+
+### ADDED FOR SSL CERT SETUP ON SOURCE-BUILD	102912
+if( $source_lst[$clc_index] eq "BZR" || $source_lst[$clc_index] eq "SRC" ){
+	$cmd = "mkdir -p /root/console-certs";
+	print "$cmd\n";
+	system($cmd);
+	print "\n";
+
+	$cmd = "cd /root/console-certs; wget qa-server.eucalyptus-systems.com/4qa/etc/user_console_certs/ssl.crt";
+        print "$cmd\n";
+        system($cmd);
+        print "\n";
+
+	$cmd = "cd /root/console-certs; wget qa-server.eucalyptus-systems.com/4qa/etc/user_console_certs/ssl.key";
+        print "$cmd\n";
+        system($cmd);
+        print "\n";
+
+	my_sed("sslcert: .*", "sslcert: /root/console-certs/ssl.crt", $ui_conf_file);
+	my_sed("sslkey: .*", "sslkey: /root/console-certs/ssl.key", $ui_conf_file);
+};
 
 print "=========== AFTER MODIFICATION ==========\n";
 print "\n";
@@ -244,6 +277,17 @@ print "$cmd\n";
 system($cmd);
 print "\n";
 
+print "Scan Existing UI Config File for \'sslcert:\'\n";
+$cmd = "cat $ui_conf_file | grep sslcert";
+print "$cmd\n";
+system($cmd);
+print "\n";
+
+print "Scan Existing UI Config File for \'sslkey:\'\n";
+$cmd = "cat $ui_conf_file | grep sslkey";
+print "$cmd\n";
+system($cmd);
+print "\n";
 
 print "\n";
 print "#################### RESTART UI ##########################\n";

@@ -258,8 +258,8 @@ if( $source_lst[$clc_index] eq "BZR" || $source_lst[$clc_index] eq "SRC" ){
         system($cmd);
         print "\n";
 
-	my_sed("sslcert: .*", "sslcert: /root/console-certs/ssl.crt", $ui_conf_file);
-	my_sed("sslkey: .*", "sslkey: /root/console-certs/ssl.key", $ui_conf_file);
+	my_sed("#sslcert: .*", "sslcert: /root/console-certs/ssl.crt", $ui_conf_file);
+	my_sed("#sslkey: .*", "sslkey: /root/console-certs/ssl.key", $ui_conf_file);
 };
 
 print "=========== AFTER MODIFICATION ==========\n";

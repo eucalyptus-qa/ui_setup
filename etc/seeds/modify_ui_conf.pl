@@ -200,7 +200,7 @@ print "\n";
 my $ui_conf_file = "";
 
 if( $source_lst[$clc_index] eq "BZR" || $source_lst[$clc_index] eq "SRC" ){
-	$ui_conf_file = "/root/euca_builder/eee/eucalyptus/console/server/console.ini";
+	$ui_conf_file = "/root/euca_builder/eee/eucalyptus/console/eucaconsole/console.ini";
 }else{
 	if( $distro_lst[$clc_index] eq "UBUNTU" ){
 		$ui_conf_file = "/etc/eucalyptus-console/console.ini";		### CANNOT VERIFY SINCE NO PACKAGES FOR UBUNTU 102912

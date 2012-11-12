@@ -1,3 +1,18 @@
+
+ui_setup
+========
+
+## Description
+
+Setup Eucalyptus Console -- available after Eucalyptus 3.2
+
+## Procedure
+
+1. Configures userconsole.ini file to point to CLC.
+2. For source-build, it downloads pre-generated SSL keys from QA server and sets them up for secure http connection.
+
+<hr><hr><hr>
+
 # Eucalyptus Testunit Framework
 
 Eucalyptus Testunit Framework is designed to run a list of test scripts written by Eucalyptus developers.
